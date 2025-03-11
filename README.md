@@ -1,6 +1,6 @@
 # Steps to revoke Coursera license
 
-* Select learners no longer in ARS from the programs
+* Select learners no longer in ARS
 * Select learners having longest period of inactive.
   * Coursera amin page -> Home -> select program -> Manage Learners -> Select all -> "Download as .csv"
   * Received email Download -> Save to the folder "SCINet Office - Documents\Training\Coursera License\Downloaded Learner List"
