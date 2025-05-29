@@ -36,8 +36,10 @@ def process_learner_data(input_dir):
     # Read and concatenate all CSV files
     dfs = []
     date_columns = ['Join Date', 'Invitation Date', 'Latest Program Activity Date']
-    for file in csv_files:
+    for i, file in enumerate(csv_files):
         df = pd.read_csv(file)
+        df['Programs'] = str(i) # found on May 29, 2025, no Programs column can be selected for downloaded csv 
+        df['Invitation Date'] = '' # 'Invitation Date' is no longer needed, so make a blank one
         df = convert_date_format(df, date_columns)
         dfs.append(df)
     
@@ -46,6 +48,7 @@ def process_learner_data(input_dir):
     # Select required columns
     columns = ['Full Name', 'Email', 'Join Date', 'Invitation Date', 
               'Programs', 'Latest Program Activity Date']
+    # columns = ['Full Name', 'Email', 'Join Date', 'Latest Program Activity Date']
     selected_df = combined_df[columns]
     
     # Process Join Dates
