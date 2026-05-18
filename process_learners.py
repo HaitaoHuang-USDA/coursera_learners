@@ -134,7 +134,7 @@ def process_learner_data(input_dir):
     if messagebox.askyesno("Processing Complete", 
         "Move the downloaded csv files and the result to backup folder?"):
         # Create backup folder and date subfolder
-        backup_dir = os.path.join(input_dir, 'backups')
+        backup_dir = os.path.join(os.path.dirname(input_dir), 'backups')
         date_folder = datetime.now().strftime("%Y-%m-%d")
         backup_date_dir = os.path.join(backup_dir, date_folder)
         os.makedirs(backup_date_dir, exist_ok=True)
