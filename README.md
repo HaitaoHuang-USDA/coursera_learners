@@ -11,6 +11,9 @@
   * Clear the local folder "SCINet Office - Documents\Training\Coursera License\Downloaded Learner List" - the following steps will read all the csv files
   * Wait for the emails for download is ready ->Received email -> Download -> Save to the folder "SCINet Office - Documents\Training\Coursera License\Downloaded Learner List"
   * Run the python program process_learners.py (conda env 'ai4onp2') - https://github.com/HaitaoHuang-USDA/coursera_learners
+    * In the downloaded csv file, the header of Full Name and Email may change. If so, change the columns names in the python code. (e.g. Email changed to Email*)
   * Open the result csv, copy the top n rows and **paste values** to the end of the Excel file 'Coursera Learners' - Sheet 'Removed List' (in folder "SCINet Office - Documents\Training\Coursera License)
     * The copied list is ordered by latest activity date.
 * On Coursera Admin page, remove the selected learners from the joined programs (**remove all programs associated with the learner**)
+  * tip - copy 5 cells in the email column and paste to the search box on the program learner's page (above the table) - so the 5 learners can be filltered in one step (tried more but the Coursera page seems confused)
+   

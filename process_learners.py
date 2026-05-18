@@ -46,14 +46,14 @@ def process_learner_data(input_dir):
     combined_df = pd.concat(dfs, ignore_index=True)
     
     # Select required columns
-    columns = ['Full Name', 'Email', 'Join Date', 'Invitation Date', 
+    columns = ['Full Name*', 'Email*', 'Join Date', 'Invitation Date', 
               'Programs', 'Latest Program Activity Date']
     # columns = ['Full Name', 'Email', 'Join Date', 'Latest Program Activity Date']
     selected_df = combined_df[columns]
     
     # Process Join Dates
-    join_date_df = selected_df.groupby(['Full Name', 'Email'])['Join Date'].agg(lambda x: x.tolist()).reset_index()
-    invitation_date_df = selected_df.groupby(['Full Name', 'Email'])['Invitation Date'].agg(lambda x: x.tolist()).reset_index()
+    join_date_df = selected_df.groupby(['Full Name*', 'Email*'])['Join Date'].agg(lambda x: x.tolist()).reset_index()
+    invitation_date_df = selected_df.groupby(['Full Name*', 'Email*'])['Invitation Date'].agg(lambda x: x.tolist()).reset_index()
     
     # Print some debug info
     print("First few rows of join_date_df:")
@@ -92,22 +92,22 @@ def process_learner_data(input_dir):
     invitation_date_df.drop(columns=inv_date_columns, inplace=True)
 
     # Merge join and invitation dates
-    date_df = pd.merge(join_date_df, invitation_date_df, on=['Full Name', 'Email'], how='outer')
+    date_df = pd.merge(join_date_df, invitation_date_df, on=['Full Name*', 'Email*'], how='outer')
 
     # Pivot for Programs and Latest Program Activity Date
     program_df = selected_df.pivot_table(
-        index=['Full Name', 'Email'],
+        index=['Full Name*', 'Email*'],
         columns='Programs',
         values='Latest Program Activity Date',
         aggfunc='first'
     ).reset_index()
 
     # Merge all dataframes
-    final_df = pd.merge(date_df, program_df, on=['Full Name', 'Email'], how='outer')
+    final_df = pd.merge(date_df, program_df, on=['Full Name*', 'Email*'], how='outer')
 
     # Convert all program date columns to datetime for comparison
     program_date_columns = [col for col in final_df.columns
-                          if col not in ['Full Name', 'Email'] + 
+                          if col not in ['Full Name*', 'Email*'] + 
                           [f'Join Date {i+1}' for i in range(max_join_dates)]]
     for col in program_date_columns:
         final_df[col] = pd.to_datetime(final_df[col], errors='coerce')
