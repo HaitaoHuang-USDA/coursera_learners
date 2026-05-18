@@ -2,6 +2,7 @@
 
 * Select learners no longer in ARS
 * Select learners having longest period of inactive.
+
   * Coursera main page -> Home -> select program)-> Program Learners -> Modify columns (Button on top right of the table) -> ensure the following checked
     * Status, Join Date, Latest Activity Date
     * Full name and Email will be included (Learners name - always displayed)
